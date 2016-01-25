@@ -81,7 +81,7 @@ func NewField(height, width int, needed int) (*Field, error) {
 		Height: height,
 		Needed: needed,
 		Width:  width,
-		Board:  make([][]bool, height),
+		Board:  make([][]bool, width),
 		Change: make(chan ChangeDirection),
 		Remove: make(chan int),
 		mu:     new(sync.Mutex),
@@ -89,7 +89,7 @@ func NewField(height, width int, needed int) (*Field, error) {
 	}
 
 	for i := range field.Board {
-		field.Board[i] = make([]bool, width)
+		field.Board[i] = make([]bool, height)
 	}
 
 	mapMu.Lock()

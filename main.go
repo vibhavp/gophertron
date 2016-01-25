@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	db "github.com/gophergala2016/gophertron/models/database"
-	"github.com/gophergala2016/gophertron/routes"
+	db "github.com/vibhavp/gophertron/models/database"
+	"github.com/vibhavp/gophertron/routes"
 )
 
 var addr = flag.String("http", "localhost:8080", "http service address")

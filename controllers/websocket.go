@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gophergala2016/gophertron/models"
 	"github.com/gorilla/websocket"
+	"github.com/vibhavp/gophertron/models"
 )
 
 var dirMap = map[string]models.Direction{

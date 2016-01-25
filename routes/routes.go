@@ -4,9 +4,9 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/gophergala2016/gophertron/controllers"
-	"github.com/gophergala2016/gophertron/models"
 	_ "github.com/rakyll/gom/http"
+	"github.com/vibhavp/gophertron/controllers"
+	"github.com/vibhavp/gophertron/models"
 )
 
 func Main(w http.ResponseWriter, r *http.Request) {

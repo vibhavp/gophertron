@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gophergala2016/gophertron/models"
 	"github.com/gorilla/websocket"
+	"github.com/vibhavp/gophertron/models"
 )
 
 func Create(w http.ResponseWriter, r *http.Request) {

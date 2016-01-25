@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"log"
 	"sync"
 	"time"
 
@@ -29,8 +28,7 @@ func listener(conn *websocket.Conn, ID int, field *models.Field) {
 
 			err := conn.ReadJSON(&req)
 			if err != nil {
-				field.Remove <- ID
-				log.Println(err)
+				//field.Remove <- ID
 				return
 			}
 
@@ -60,11 +58,16 @@ func sendPath(conn *websocket.Conn, ID int, gopher *models.Gopher, field *models
 
 	go func() {
 		for {
-			msg := <-send
-			go func() {
-				conn.WriteMessage(websocket.TextMessage, msg)
-				wait.Done()
-			}()
+			select {
+			case msg := <-send:
+				if len(msg) == 0 {
+					return
+				}
+				go func() {
+					conn.WriteMessage(websocket.TextMessage, msg)
+					wait.Done()
+				}()
+			}
 		}
 	}()
 
@@ -92,7 +95,9 @@ func sendPath(conn *websocket.Conn, ID int, gopher *models.Gopher, field *models
 			if victory {
 				wait.Add(1)
 				send <- []byte("victory")
+				wait.Wait()
 			}
+			send <- []byte{}
 			conn.Close()
 			return
 		}
